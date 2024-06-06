@@ -2,7 +2,7 @@
 
 namespace APIProject.Core.Concrete
 {
-    public class Department : IDepartment
+    public class DepartmentService : IDepartment
     {
         public string GetDepartmentName()
         {

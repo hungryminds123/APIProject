@@ -2,7 +2,7 @@
 
 namespace APIProject.Core.Concrete
 {
-    public class Employee : IEmployee
+    public class EmployeeService : IEmployee
     {
         public int AddNumbers(int a, int b)
         {

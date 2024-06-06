@@ -1,5 +1,7 @@
 using APIProject.Core.Concrete;
 using APIProject.Core.Interfaces;
+using Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace APIProject
 {
@@ -16,8 +18,15 @@ namespace APIProject
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddTransient<IEmployee, Employee>();  // this is important to register depepdencies.
-            builder.Services.AddTransient<IDepartment, Department>();
+            builder.Services.AddDbContext<SampleDatabaseDbContext>(
+                options =>
+                {
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("SampleDatabaseConnectionString"));
+                });
+
+
+            builder.Services.AddTransient<IEmployee, EmployeeService>();  // this is important to register depepdencies.
+            builder.Services.AddTransient<IDepartment, DepartmentService>();
 
             var app = builder.Build();
 
