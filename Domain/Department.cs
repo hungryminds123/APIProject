@@ -13,6 +13,8 @@ namespace Domain
 
         public string DepartmentName { get; set; }
 
+        public virtual Employee Employee { get; set; }
+
     }
 
 }

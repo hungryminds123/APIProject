@@ -20,7 +20,7 @@ namespace Domain
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SampleDatabaseDbContext).Assembly);
         }
 
 
@@ -28,6 +28,8 @@ namespace Domain
         public DbSet<Employee> Employees { get; set;}
 
         public DbSet<Department> Departments { get; set;}
+
+        public DbSet<Customer> Customers { get; set;}
 
     }
 }
