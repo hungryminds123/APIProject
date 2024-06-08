@@ -18,7 +18,7 @@ namespace Domain.Configurations
 
             builder.Property(x => x.Age).HasDefaultValue(18); // 
 
-          
+            builder.HasOne(x => x.Department).WithMany(x => x.Employee).HasForeignKey(x => x.DepartmentId);
         }
     }
 }
