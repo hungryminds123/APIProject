@@ -1,6 +1,8 @@
 using APIProject.Core.Concrete;
 using APIProject.Core.Interfaces;
 using Domain;
+using Domain.Repository.Concrete;
+using Domain.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace APIProject
@@ -25,8 +27,15 @@ namespace APIProject
                 });
 
 
-            builder.Services.AddTransient<IEmployee, EmployeeService>();  // this is important to register depepdencies.
-            builder.Services.AddTransient<IDepartment, DepartmentService>();
+
+            builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+
+
+            builder.Services.AddTransient<IEmployeeService, EmployeeService>();  // this is important to register depepdencies.
+            builder.Services.AddTransient<IDepartmentService, DepartmentService>();
+            
 
             var app = builder.Build();
 

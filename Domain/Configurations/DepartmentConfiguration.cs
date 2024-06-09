@@ -13,8 +13,6 @@ namespace Domain.Configurations
         public void Configure(EntityTypeBuilder<Department> builder)
         {
             builder.Property(x => x.DepartmentName).HasMaxLength(200);
-
-          
         }
     }
 }

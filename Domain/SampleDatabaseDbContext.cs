@@ -22,6 +22,7 @@ namespace Domain
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SampleDatabaseDbContext).Assembly);
         }
+       
 
 
 

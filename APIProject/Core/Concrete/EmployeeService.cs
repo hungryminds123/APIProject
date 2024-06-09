@@ -1,17 +1,24 @@
 ﻿using APIProject.Core.Interfaces;
+using Domain;
+using Domain.Repository.Interfaces;
 
 namespace APIProject.Core.Concrete
 {
-    public class EmployeeService : IEmployee
+    public class EmployeeService : IEmployeeService
     {
-        public int AddNumbers(int a, int b)
+        private readonly IEmployeeRepository _employeeRepository;
+
+        public EmployeeService(IEmployeeRepository employeeRepository)
         {
-            return a + b;
+            _employeeRepository = employeeRepository;
         }
 
-        public int SubtractNumbers(int a, int b)
+
+        public async Task<IEnumerable<Employee>> GetEmployeesAsync()
         {
-            return a - b;
+            var employeeList = await _employeeRepository.FindAll(x => x.IsActive == true);
+
+            return employeeList;
         }
     }
 }

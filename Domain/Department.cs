@@ -13,6 +13,8 @@ namespace Domain
 
         public string DepartmentName { get; set; }
 
+        public bool IsActive { get; set; }
+
         public ICollection<Employee> Employee { get; set; } // navigation properties
 
     }

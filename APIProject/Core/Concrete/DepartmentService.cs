@@ -1,13 +1,29 @@
 ﻿using APIProject.Core.Interfaces;
+using Domain;
+using Domain.Repository.Concrete;
+using Domain.Repository.Interfaces;
+using System.Linq.Expressions;
 
 namespace APIProject.Core.Concrete
 {
-    public class DepartmentService : IDepartment
+    public class DepartmentService : IDepartmentService
     {
-        public string GetDepartmentName()
+        private readonly IDepartmentRepository _departmentRepository;
+
+        public DepartmentService(
+            IDepartmentRepository departmentRepository)
+        {
+            _departmentRepository = departmentRepository;
+        }
+
+
+
+        public async Task<IEnumerable<Department>> GetDepartmentName()
         {
 
-            return "Inventory";
+            var departmentList = await _departmentRepository.FindAll(x => x.IsActive == true);
+
+            return departmentList.AsEnumerable();
         }
     }
 }

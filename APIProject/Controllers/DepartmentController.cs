@@ -8,19 +8,19 @@ namespace APIProject.Controllers
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        private readonly IDepartment _department;
+        private readonly IDepartmentService _department;
 
 
-        public DepartmentController(IDepartment department)
+        public DepartmentController(IDepartmentService department)
         {
             _department = department;
         }
 
 
         [HttpGet]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete()
         {
-            string departName =  _department.GetDepartmentName();
+            var departName = await _department.GetDepartmentName();
 
             return Ok(departName);
         }

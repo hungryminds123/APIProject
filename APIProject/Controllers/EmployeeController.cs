@@ -9,9 +9,10 @@ namespace APIProject.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployee _employee;
+        private readonly IEmployeeService _employee;
 
-        public EmployeeController(IEmployee employee)
+        public EmployeeController(
+            IEmployeeService employee)
         {
             _employee = employee;
         }
@@ -31,16 +32,10 @@ namespace APIProject.Controllers
         // 2.I don't want to create a new object
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            //Émployee employee = new Émployee();
-            //employee.AddNumbers(10, 20);
-
-
-           int data =  _employee.AddNumbers(10, 20);
-
-
-            return Ok(data);
+            var empList = await _employee.GetEmployeesAsync();
+            return Ok(empList);
         }
 
         [HttpPost]
@@ -52,8 +47,7 @@ namespace APIProject.Controllers
         [HttpPut]
         public IActionResult Put()
         {
-            _employee.SubtractNumbers(10, 20);
-
+           
             return Ok();
         }
 
