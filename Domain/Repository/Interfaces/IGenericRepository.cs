@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Repository.Interfaces
 {
-    public interface IGenericRepository<T> where  T:class
+    public interface IGenericRepository<T> where T : class
     {
         Task<T> GetByIdAsync(int id);
 
@@ -17,7 +17,7 @@ namespace Domain.Repository.Interfaces
 
         Task<T> Update(T entity);     // update (U)
 
-        Task<T> Delete(int id);   // delete (D)
+        Task Delete(T entity);   // delete (D)
 
         Task<T> Find(Expression<Func<T, bool>> predicate);
 

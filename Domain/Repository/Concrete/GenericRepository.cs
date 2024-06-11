@@ -18,16 +18,20 @@ namespace Domain.Repository.Concrete
             this.dbContext = dbContext;
         }
 
-        public Task<T> Add(T entity)
+        public async Task<T> Add(T entity)
         {
-            throw new NotImplementedException();
+            await dbContext.AddAsync(entity);
+            await dbContext.SaveChangesAsync();
+            return entity;
         }
 
-        public Task<T> Delete(int id)
+        public async Task Delete(T entity)
         {
-            throw new NotImplementedException();
+            dbContext.Set<T>().Remove(entity);
+            await dbContext.SaveChangesAsync();
         }
 
+    
         public async Task<T> Find(Expression<Func<T, bool>> predicate)
         {
            return  await dbContext.Set<T>().FirstOrDefaultAsync(predicate);
@@ -38,9 +42,9 @@ namespace Domain.Repository.Concrete
             return await dbContext.Set<T>().Where(predicate).ToListAsync();
         }
 
-        public Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await dbContext.Set<T>().ToListAsync();
         }
 
         public Task<T> GetByIdAsync(int id)
